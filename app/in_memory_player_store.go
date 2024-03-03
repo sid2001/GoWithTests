@@ -1,0 +1,21 @@
+package main
+
+func NewInMemoryPlayerStore() *InMemoryPlayerStore {
+	return &InMemoryPlayerStore{}
+}
+
+type InMemoryPlayerStore struct {
+	store map[string]int
+}
+
+func (i *InMemoryPlayerStore) GetPlayerScore(name string) int {
+	return i.store[name]
+}
+func (i *InMemoryPlayerStore) RecordWin(name string) {
+	_, ok := i.store[name]
+	if !ok {
+		i.store = map[string]int{name: 1}
+	} else {
+		i.store[name]++
+	}
+}
